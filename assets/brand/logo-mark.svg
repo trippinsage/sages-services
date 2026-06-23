@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Sages Services mark</title>
+  <desc id="desc">A warm terracotta arch and pathway forming a subtle letter S.</desc>
+  <rect width="64" height="64" rx="18" fill="#B85C3D"/>
+  <path d="M18 25.5C18 16.94 24.94 10 33.5 10H46v9H33.5a6.5 6.5 0 0 0 0 13H37c8.28 0 15 6.72 15 15S45.28 62 37 62H18v-9h19a6 6 0 0 0 0-12h-3.5C24.94 41 18 34.06 18 25.5Z" fill="#FFF9F1" transform="translate(0 -4)"/>
+</svg>

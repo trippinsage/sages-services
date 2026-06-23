@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 72" role="img" aria-labelledby="title desc">
+  <title id="title">Sages Services</title>
+  <desc id="desc">Sages Services wordmark in warm terracotta and espresso.</desc>
+  <rect x="4" y="4" width="64" height="64" rx="18" fill="#B85C3D"/>
+  <path d="M22 29.5C22 20.94 28.94 14 37.5 14H50v9H37.5a6.5 6.5 0 0 0 0 13H41c8.28 0 15 6.72 15 15S49.28 66 41 66H22v-9h19a6 6 0 0 0 0-12h-3.5C28.94 45 22 38.06 22 29.5Z" fill="#FFF9F1" transform="translate(0 -4)"/>
+  <text x="88" y="47" fill="#2C211B" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" letter-spacing="-.5">Sages Services</text>
+</svg>
