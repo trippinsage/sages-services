@@ -734,6 +734,7 @@ h3 {
 }
 
 .contact-form {
+  position: relative;
   display: grid;
   gap: 1.2rem;
   padding: clamp(1.5rem, 4vw, 2.8rem);
@@ -746,6 +747,12 @@ h3 {
 .field-row {
   display: grid;
   gap: 0.4rem;
+}
+
+.form-field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1.2rem;
 }
 
 .field-row label {
@@ -786,11 +793,68 @@ h3 {
   width: 100%;
 }
 
+.contact-form .button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.form-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.consent-row {
+  display: grid;
+  grid-template-columns: 1.15rem 1fr;
+  gap: 0.65rem;
+  align-items: start;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.consent-row input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.15rem 0 0;
+  accent-color: var(--terracotta-dark);
+}
+
+.consent-row a {
+  color: var(--terracotta-dark);
+  font-weight: 700;
+}
+
 .form-note {
   margin-bottom: 0;
   color: var(--ink-soft);
   font-size: 0.85rem;
   text-align: center;
+}
+
+.form-status {
+  min-height: 1.4em;
+  margin: -0.4rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status[data-state="success"] {
+  color: #25613c;
+}
+
+.form-status[data-state="error"] {
+  color: #9b2f24;
 }
 
 .site-footer {
@@ -874,6 +938,48 @@ h3 {
 .legal-shell p,
 .legal-shell li {
   color: var(--ink-soft);
+}
+
+.email-directory {
+  display: grid;
+  gap: 0;
+  margin: 1.5rem 0 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.email-directory > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--paper);
+}
+
+.email-directory > div + div {
+  border-top: 1px solid var(--line);
+}
+
+.email-directory dt {
+  font-weight: 800;
+}
+
+.email-directory dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.email-directory a {
+  color: var(--terracotta-dark);
+}
+
+@media (max-width: 560px) {
+  .email-directory > div {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
 }
 
 .legal-updated {

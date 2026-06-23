@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; img-src 'self' data:; style-src 'self'; script-src 'self'">
   <title>Newfoundland Web Design &amp; Custom Software | Sages Services</title>
   <meta name="description" content="Newfoundland web design and custom software by Sages Services. View recent work for Riff's, RPM Automotive, and East Coast Pets.">
   <meta name="author" content="Sages Services">
@@ -10,6 +11,7 @@
   <meta name="theme-color" content="#B85C3D">
   <meta name="color-scheme" content="light">
   <meta name="format-detection" content="telephone=no">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="canonical" href="https://sages.services/">
   <link rel="alternate" hreflang="en-CA" href="https://sages.services/">
   <link rel="alternate" hreflang="x-default" href="https://sages.services/">
@@ -18,7 +20,7 @@
   <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/brand/brand-banner-site.jpg" as="image" type="image/jpeg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/site.css?v=20260623">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_CA">
@@ -250,12 +252,12 @@
             </div>
           </article>
         </div>
-        <div class="capability-row" aria-label="Additional capabilities">
-          <span>Online stores</span>
-          <span>Booking systems</span>
-          <span>SEO</span>
-          <span>Accessibility</span>
-          <span>Maintenance</span>
+        <div class="capability-row" role="list" aria-label="Additional capabilities">
+          <span role="listitem">Online stores</span>
+          <span role="listitem">Booking systems</span>
+          <span role="listitem">SEO</span>
+          <span role="listitem">Accessibility</span>
+          <span role="listitem">Maintenance</span>
         </div>
       </div>
     </section>
@@ -365,14 +367,27 @@
       <div class="container contact-grid">
         <div>
           <p class="eyebrow">Start a conversation</p>
-          <h2 id="contact-heading">Tell us what you want to improve.</h2>
-          <p>A new website, a better process, or an idea for custom software. Send a few details and we will reply with the next step.</p>
+          <h2 id="contact-heading">Tell us what you want to build.</h2>
+          <p>Share your goals, timing, and budget range. We will review the details and reply with practical next steps for your website or software project.</p>
           <a class="email-link" href="mailto:contact@sages.services?subject=Project%20inquiry">contact@sages.services</a>
         </div>
-        <form class="contact-form" action="mailto:contact@sages.services?subject=Project%20inquiry" method="post" enctype="text/plain" aria-describedby="form-note" data-email-form>
-          <div class="field-row">
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="post" aria-describedby="form-note form-status" data-email-form>
+          <input type="hidden" name="access_key" value="e371db18-32d4-440d-aca6-6295d08df169">
+          <input type="hidden" name="subject" value="New project inquiry from sages.services">
+          <input type="hidden" name="from_name" value="Sages Services website">
+          <div class="form-trap" hidden>
+            <label for="botcheck">Leave this field empty</label>
+            <input id="botcheck" name="botcheck" type="checkbox" tabindex="-1">
+          </div>
+          <div class="form-field-grid">
+            <div class="field-row">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required>
+            </div>
+            <div class="field-row">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required>
+            </div>
           </div>
           <div class="field-row">
             <label for="business">Business name <span>optional</span></label>
@@ -383,17 +398,49 @@
             <select id="interest" name="interest" required>
               <option value="" selected disabled>Choose a service</option>
               <option>Custom website</option>
-              <option>Business software</option>
-              <option>Website improvement</option>
+              <option>Website redesign</option>
+              <option>Custom software or web app</option>
+              <option>Business automation or integration</option>
+              <option>Ongoing website support</option>
               <option>Not sure yet</option>
             </select>
           </div>
-          <div class="field-row">
-            <label for="message">A few details</label>
-            <textarea id="message" name="message" rows="5" maxlength="1500" required></textarea>
+          <div class="form-field-grid">
+            <div class="field-row">
+              <label for="budget">Estimated budget <span>optional</span></label>
+              <select id="budget" name="budget">
+                <option value="" selected>Choose a range</option>
+                <option>Under $2,500</option>
+                <option>$2,500–$5,000</option>
+                <option>$5,000–$10,000</option>
+                <option>$10,000–$25,000</option>
+                <option>$25,000+</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <label for="timeline">Desired timeline <span>optional</span></label>
+              <select id="timeline" name="timeline">
+                <option value="" selected>Choose a timeline</option>
+                <option>As soon as possible</option>
+                <option>Within 1–2 months</option>
+                <option>Within 3–6 months</option>
+                <option>More than 6 months</option>
+                <option>Flexible</option>
+              </select>
+            </div>
           </div>
-          <button class="button" type="submit">Open email to send</button>
-          <p class="form-note" id="form-note">This opens your email app. Your message is not stored here.</p>
+          <div class="field-row">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" rows="6" maxlength="2000" placeholder="What should the website or software accomplish? Include any important features, current problems, or deadlines." required></textarea>
+          </div>
+          <label class="consent-row" for="privacy-consent">
+            <input id="privacy-consent" name="privacy_consent" type="checkbox" value="Accepted" required>
+            <span>I agree that Sages Services may use these details to respond to my inquiry, as described in the <a href="privacy.html">privacy policy</a>.</span>
+          </label>
+          <button class="button" type="submit" data-submit-button>Send message</button>
+          <p class="form-note" id="form-note">Your details are encrypted in transit and processed by Web3Forms for delivery. Do not include passwords or payment details.</p>
+          <p class="form-status" id="form-status" role="status" aria-live="polite" data-form-status></p>
         </form>
       </div>
     </section>
@@ -422,6 +469,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/site.js?v=20260623" defer></script>
 </body>
 </html>

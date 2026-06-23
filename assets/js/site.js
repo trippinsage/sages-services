@@ -107,24 +107,89 @@
 
   const emailForm = document.querySelector("[data-email-form]");
   if (emailForm) {
-    emailForm.addEventListener("submit", (event) => {
+    const submitButton = emailForm.querySelector("[data-submit-button]");
+    const formStatus = emailForm.querySelector("[data-form-status]");
+    const nameInput = emailForm.elements.namedItem("name");
+    const emailInput = emailForm.elements.namedItem("email");
+    const messageInput = emailForm.elements.namedItem("message");
+    const formEndpoint = emailForm.action;
+    let isSubmitting = false;
+
+    const setFormStatus = (message, state) => {
+      if (!formStatus) return;
+      formStatus.textContent = message;
+      if (state) {
+        formStatus.dataset.state = state;
+      } else {
+        delete formStatus.dataset.state;
+      }
+    };
+
+    emailForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!emailForm.reportValidity()) return;
+      if (isSubmitting || !emailForm.reportValidity()) return;
 
       const data = new FormData(emailForm);
       const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
       const business = String(data.get("business") || "").trim();
       const interest = String(data.get("interest") || "Project inquiry").trim();
       const message = String(data.get("message") || "").trim();
-      const subject = `${interest} from ${business || name}`;
-      const details = [
-        `Name: ${name}`,
-        business ? `Business: ${business}` : "",
-        `Project type: ${interest}`
-      ].filter(Boolean).join("\n");
-      const body = `${details}\n\n${message}`;
 
-      window.location.href = `mailto:contact@sages.services?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (!name) {
+        nameInput?.setCustomValidity("Please enter your name.");
+        nameInput?.reportValidity();
+        return;
+      }
+      if (!message) {
+        messageInput?.setCustomValidity("Please add a few project details.");
+        messageInput?.reportValidity();
+        return;
+      }
+
+      data.set("name", name);
+      data.set("email", email);
+      data.set("business", business);
+      data.set("interest", interest);
+      data.set("message", message);
+      data.set("subject", `${interest} inquiry from ${business || name}`);
+      const payload = Object.fromEntries(data.entries());
+
+      isSubmitting = true;
+      emailForm.setAttribute("aria-busy", "true");
+      submitButton?.setAttribute("disabled", "");
+      if (submitButton) submitButton.textContent = "Sending…";
+      setFormStatus("Sending your message…", "pending");
+
+      try {
+        const response = await fetch(formEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.success !== true) {
+          throw new Error("Submission rejected");
+        }
+
+        emailForm.reset();
+        setFormStatus("Message sent. We’ll reply as soon as possible.", "success");
+      } catch (error) {
+        setFormStatus("We couldn’t send your message. Please try again or email contact@sages.services.", "error");
+      } finally {
+        isSubmitting = false;
+        emailForm.removeAttribute("aria-busy");
+        submitButton?.removeAttribute("disabled");
+        if (submitButton) submitButton.textContent = "Send message";
+      }
+    });
+
+    [nameInput, emailInput, messageInput].forEach((input) => {
+      input?.addEventListener("input", () => input.setCustomValidity(""));
     });
   }
 
